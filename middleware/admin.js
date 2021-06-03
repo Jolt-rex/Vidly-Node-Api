@@ -1,11 +1,7 @@
-const config = require("config");
+// 401 Unauthorised - no valid token
+// 403 Forbidden - not authorised to access
 
 module.exports = function(req, res, next) {
-  // 401 Unauthorized
-  // 403 Forbidden
-  if (!config.get("requiresAuth")) return next();
-
-  if (!req.user.isAdmin) return res.status(403).send("Access denied.");
-
+  if (!req.user.isAdmin) return res.status(403).send('Access denied.');
   next();
 };
